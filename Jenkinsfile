@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven'   // 🔥 THIS LINE FIXES YOUR ISSUE
+    }
+
     environment {
         USER_IMAGE = "user-service"
         BOOK_IMAGE = "book-service"
@@ -9,17 +13,10 @@ pipeline {
 
     stages {
 
-        stage('Clone Code') {
-            steps {
-                git branch: 'main',
-                    credentialsId: 'github-ssh',
-                    url: 'git@github.com:Anumandlashiva-637/full-devops-project.git'
-            }
-        }
-
         stage('Build Services (Maven)') {
             steps {
                 sh '''
+                mvn -version
                 cd user-service && mvn clean package -DskipTests
                 cd ../book-service && mvn clean package -DskipTests
                 cd ../order-service && mvn clean package -DskipTests
