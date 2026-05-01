@@ -12,8 +12,8 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @GetMapping("/users")
-    public String users() {
+    @GetMapping("/orders")
+    public String orders() {
         return "order Service Working 🚀";
     }
 }
